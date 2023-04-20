@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
+import { Container } from '@mui/material';
 
 
 const TaskCreator = ({createNewTask}) => {
@@ -12,19 +13,23 @@ const TaskCreator = ({createNewTask}) => {
     createNewTask(newTaskName)
     setNewTaskName('')  
   }
-
+  
   return (
-    <Box>
+    <Box sx={{display:'flex',alignItems:'center',justifyContent:'center'}}>
       <form onSubmit={handleSubmit}>
+        <Container>
         <TextField 
+        sx={{background:'#f0f0d8'}}
+        size='small'
         id="outlined-basic"
-        label="Outlined" 
+        label="New task..." 
         variant="outlined" 
         type='text' 
         value={newTaskName}
         onChange={(e)=> setNewTaskName(e.target.value)} 
         placeholder='Enter a new task'/>
-        <Button variant='outlined'>Save Task</Button>
+        <Button size='large' color='secondary' variant='contained' onClick={handleSubmit}>Save Task</Button>
+        </Container>
       </form>
     </Box>
   )

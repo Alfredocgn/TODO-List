@@ -4,6 +4,8 @@ import TaskCreator from './components/TaskCreator/TaskCreator';
 import { TaskTable } from './components/TaskTable/TaskTable';
 import { VisibilityControl } from './components/VisibilityControl/VisibilityControl';
 import Box from '@mui/material/Box';
+import { Container, ThemeProvider, Typography } from '@mui/material';
+import { createTheme } from '@mui/material';
 
 
 function App() {
@@ -46,25 +48,37 @@ function createNewTask(taskName){
     )
   }
 
+  const theme =createTheme({
+    palette:{
+      primary:{
+        main:'#f8f4e4'
+      },
+      secondary:{
+        main:'#4e3f30'
+      }
+    }
+  })
+
   return (
-    <Box sx={{p:2, display:'flex', flexDirection:'column'}}>
+    <ThemeProvider theme={theme}>
+    <Container sx={{display:'flex',justifyContent:'center', fontFamily:'sans-serif',background:'#0ca5b0'  }}>
+    <Box sx={{background:'#f8f4e4',p:2,margin:'2rem', display:'flex', flexDirection:'column',justifyContent:'center',alignItems:'center', border:'solid',borderRadius:'2rem',width:'50%',borderColor:'#4e3f30'}}>
+      <Typography variant='h4' sx={{fontWeight:900 ,margin:'1rem',color:'#4e3f30',fontFamily:'sans-serif'}}>My To-Do List</Typography>
       <TaskCreator createNewTask={createNewTask}/>
+      <Container sx={{display:'flex',flexDirection:'column',alignItems:'center'}}>
       <TaskTable tasks={taskItems} toggleTask={toggleTask} />
       <VisibilityControl 
       isChecked={showCompleted}
       setShowCompleted={(checked)=>setShowCompleted(checked)}
-      cleanTask={cleanTask}
-      
-      />    
-
-
+      cleanTask={cleanTask}      
+      />
         {
-          showCompleted && (
-            <TaskTable tasks={taskItems} toggleTask={toggleTask} showCompleted ={showCompleted}/>      
-          ) 
-        } 
-      
+          showCompleted && (<TaskTable tasks={taskItems} toggleTask={toggleTask} showCompleted ={showCompleted}/>) 
+        }
+      </Container>
     </Box>
+    </Container>
+    </ThemeProvider>
   );
 }
 

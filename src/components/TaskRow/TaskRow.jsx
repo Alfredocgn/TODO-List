@@ -1,17 +1,21 @@
+import { Checkbox, TableRow, Typography } from "@mui/material"
+
 
 
 export const TaskRow = ({task,toggleTask}) =>{
     return(
-        <tr>
-            <td>
+
+        <TableRow sx={{display:'flex',alignItems:'center',justifyContent:"flex-start"}}>
+            <Typography sx={{color:'#4e3f30',fontWeight:500}}>
             {task.name}
-                <input
+            </Typography>
+                <Checkbox
                 checked={task.done} 
                 onChange={()=> toggleTask(task)}
                 type="checkbox"
+                color="secondary"
                 />
-            </td>
-        </tr>
+        </TableRow>
 
     )
 }
